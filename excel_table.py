@@ -34,9 +34,9 @@ def fill_table() -> None:
         worksheet.write_formula(f'D{j + 2}', f'=(C{j + 2}-B{j + 2})*(1-{tax})')
     worksheet.conditional_format(f'D2:D{len(items.item_list)}', {
         'type' : '3_color_scale',
-        'min_color' : '#C5D9F1',
-        'mid_color' : '#8DB4E3',
-        'max_color' : '#538ED5',
+        'min_color' : '#d35400',
+        'mid_color' : '#f7dc6f',
+        'max_color' : '#27ae60',
     })
     
 
