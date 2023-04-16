@@ -6,6 +6,8 @@ def get_min_sell_price(response: str) -> int:
     for j in range(len(response)):
         if response[j].get('sell_price_min') != 0 and response[j].get('city') == city:
             prices.append(response[j].get('sell_price_min'))
+    if prices == []:
+        return 0
     return min(prices)
 
 def get_max_buy_price(response: str) -> int:

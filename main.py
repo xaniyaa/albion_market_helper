@@ -12,11 +12,11 @@ if __name__ == "__main__":
     try:
         os.remove(f'{os.curdir}/price_table.xlsx')
         init_table()
-        fill_table
+        fill_table()
         close_table(workbook)
     except FileNotFoundError:
         init_table()
-        fill_table
+        fill_table()
         close_table(workbook)
     except PermissionError:
         print('Ошибка при пересоздании таблицы, закройте программы, использующие таблицу, и перезапустите программу')
