@@ -32,6 +32,13 @@ def fill_table() -> None:
         fill_item_sell_price(j, items.item_dict_inverted[items.item_list[j]])
         fill_item_sell_price_BlackMarket(j, items.item_dict_inverted[items.item_list[j]])
         worksheet.write_formula(f'D{j + 2}', f'=(C{j + 2}-B{j + 2})*(1-{tax})')
+        worksheet.write_formula(f'E{j + 2}', f'=(B{j + 2}/D{j + 2})')
+    worksheet.conditional_format(f'E2:E{len(items.item_list) + 1}', {
+        'type' : '3_color_scale',
+        'min_color' : '#d35400',
+        'mid_color' : '#f7dc6f',
+        'max_color' : '#27ae60',
+    })
     worksheet.conditional_format(f'D2:D{len(items.item_list) + 1}', {
         'type' : '3_color_scale',
         'min_color' : '#d35400',
