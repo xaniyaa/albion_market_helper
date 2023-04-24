@@ -7,7 +7,7 @@ from data import items, settings
 from helpers import get_min_sell_price
 
 
-
+headers = {'accept': '*/*', 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'}
 
 def init_table() -> None:
     '''Размечает таблицу'''
@@ -49,14 +49,15 @@ def fill_table() -> None:
 
 def fill_item_sell_price(num: int , item_name: str) -> None:
     '''Получает название предмета и индекс ячейки C, вписывает цену с выбранного маркета'''
-    request = requests.get(f'https://www.albion-online-data.com/api/v2/stats/prices/{item_name}.json?locations={settings.chosen_location}&qualities=0').json()
+    request = requests.get(f'https://www.albion-online-data.com/api/v2/stats/prices/{item_name}.json?locations={settings.chosen_location}&qualities=0', headers=headers)
+    request = request.json()
     worksheet.write(f'B{num + 2}', get_min_sell_price(request))
     if settings.DEBUG == True:
         print(request[0].get('sell_price_min_date'))
 
 def fill_item_sell_price_BlackMarket(num: int, item_name: str) -> None:
     '''Получает название предмета и индекс ячейки B, вписывает цену с черного рынка'''
-    request = requests.get(f'https://www.albion-online-data.com/api/v2/stats/prices/{item_name}.json?locations=BlackMarket&qualities=0').json()
+    request = requests.get(f'https://www.albion-online-data.com/api/v2/stats/prices/{item_name}.json?locations=BlackMarket&qualities=0', headers=headers).json()
     worksheet.write(f'C{num + 2}', get_min_sell_price(request))
     if settings.DEBUG == True:
         print(request[0].get('sell_price_min_date'))
